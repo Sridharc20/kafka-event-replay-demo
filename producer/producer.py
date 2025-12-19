@@ -24,9 +24,8 @@ def send_event(event_type, data):
 
 if __name__ == "__main__":
     # Sample events
-    send_event("USER_CREATED", {"userId": "u1", "name": "Sridhar"})
-    send_event("USER_CREATED", {"userId": "u2", "name": "Krishna"})
-    send_event("USER_UPDATED", {"userId": "u1", "name": "Sridhar C"})
-    send_event("USER_CREATED", {"userId": "u3", "name": "Ram"})
-    send_event("USER_CREATED", {"userId": "u4", "name": "Lakshman"})
-    send_event("USER_CREATED", {"userId": "u5", "name": "Bharath"})
+    # TIME -2 EVENTS
+    send_event("USER_CREATED", {"userId": "u100", "name": "Devavratha"})
+    send_event("USER_CREATED", {"userId": "u101", "name": "Dhasharatha"})
+    send_event("USER_UPDATED", {"userId": "u100", "name": "Bheeshma"})
+    send_event("USER_CREATED", {"userId": "u102", "name": "Rama"})

@@ -2,9 +2,6 @@ import json
 import psycopg2
 from kafka import KafkaConsumer
 
-# Replay mode toggle
-REPLAY_MODE = True  # Set False for live consumption
-
 # Connect to PostgreSQL
 conn = psycopg2.connect(
     dbname="usersdb",
@@ -24,14 +21,17 @@ CREATE TABLE IF NOT EXISTS users (
 )
 """)
 
-REPLAY_MODE = True
+group_id = "user-service-live"
 
+# Kafka consumer replay
+# group_id = "user-service-replay-v1"
 
-# Kafka consumer
+TOPIC = "user-events"
+
 consumer = KafkaConsumer(
-    "user-events",
+    TOPIC,
     bootstrap_servers="localhost:9092",
-    group_id="user-service-replay-v1" if REPLAY_MODE else "user-service-live",
+    group_id=group_id,
     auto_offset_reset="earliest",
     value_deserializer=lambda v: json.loads(v.decode("utf-8"))
 )
@@ -64,3 +64,5 @@ for message in consumer:
             """,
             (data["name"], data["userId"])
         )
+    
+    consumer.commit()

@@ -29,4 +29,3 @@ Producer → Kafka → Consumer → PostgreSQL
       password: admin
 
 2. Create Virtual Env
-    
